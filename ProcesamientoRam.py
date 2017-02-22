@@ -38,3 +38,10 @@ def operacion(nombre,env,memoria):
                 if a ==1:
                     Iduration = random.randint(1,3)
                     print(nombre,'realizo', Iduration, 'operaciones adicionales')
+
+                    if a ==2:
+                    with operaciones.request() as turno:
+                        yield turno
+                        yield env.timeout(ready_duration)
+                        print (nombre,'termino a las',env.now)
+                
