@@ -45,3 +45,14 @@ def operacion(nombre,env,memoria):
                         yield env.timeout(ready_duration)
                         print (nombre,'termino a las',env.now)
                 
+
+env = simpy.Environment()
+memoria = simpy.Resource(env,capacity=10)
+operaciones = simpy.Resource(env,capacity=3)
+tiempoMemoria = 0
+cantidad = 25
+cantidadfloat = cantidad + 0.0
+for i in range(cantidad):
+    env.process(operacion('operacion %d' %i,env,memoria))
+env.run(until=30)                
+print('el tiempo promedio es',tiempoMemoria/cantidadfloat)
